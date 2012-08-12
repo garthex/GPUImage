@@ -219,7 +219,7 @@ NSString *const kGPUImageCropFragmentShaderString =  SHADER_STRING
         1.0f,  1.0f,
     };
     
-    [self renderToTextureWithVertices:cropSquareVertices textureCoordinates:cropTextureCoordinates sourceTexture:filterSourceTexture];
+    [self renderToTextureWithVertices:cropSquareVertices textureCoordinates:cropTextureCoordinates sourceTexture:filterSourceTexture frameTime:frameTime];
 
     [self informTargetsAboutNewFrameAtTime:frameTime];
 }

@@ -415,7 +415,7 @@ NSString *const kGPUImageToneCurveFragmentShaderString = SHADER_STRING
 #pragma mark -
 #pragma mark Rendering
 
-- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture;
+- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture frameTime:(CMTime)frameTime;
 {
     if (self.preventRendering)
     {

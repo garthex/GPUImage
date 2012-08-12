@@ -86,7 +86,7 @@ NSString *const kGPUImageCrosshairFragmentShaderString = SHADER_STRING
     [self informTargetsAboutNewFrameAtTime:frameTime];
 }
 
-- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture;
+- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture frameTime:(CMTime)frameTime;
 {
     // Prevent rendering of the frame by normal means
 }

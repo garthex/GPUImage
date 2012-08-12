@@ -209,7 +209,7 @@
 #pragma mark -
 #pragma mark Rendering
 
-- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture;
+- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture frameTime:(CMTime)frameTime;
 {
     if (self.preventRendering)
     {
@@ -217,7 +217,7 @@
     }
     
     // Run the first stage of the two-pass filter
-    [super renderToTextureWithVertices:vertices textureCoordinates:textureCoordinates sourceTexture:sourceTexture];
+    [super renderToTextureWithVertices:vertices textureCoordinates:textureCoordinates sourceTexture:sourceTexture frameTime:frameTime];
     
     // Run the second stage of the two-pass filter
     [self setSecondFilterFBO];

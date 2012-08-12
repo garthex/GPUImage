@@ -378,7 +378,7 @@ NSString *const kGPUImageJFAVoroniFragmentShaderString = SHADER_STRING
 }
 
 
-- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture;
+- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture frameTime:(CMTime)frameTime;
 {
     // Run the first stage of the two-pass filter
     [GPUImageOpenGLESContext useImageProcessingContext];
@@ -387,7 +387,7 @@ NSString *const kGPUImageJFAVoroniFragmentShaderString = SHADER_STRING
     
     glUniform2f(sizeUniform, _sizeInPixels.width, _sizeInPixels.height);
     
-    [super renderToTextureWithVertices:vertices textureCoordinates:textureCoordinates sourceTexture:sourceTexture];
+    [super renderToTextureWithVertices:vertices textureCoordinates:textureCoordinates sourceTexture:sourceTexture frameTime:frameTime];
     
     for (int pass = 1; pass <= numPasses + 1; pass++) {
         
@@ -400,7 +400,7 @@ NSString *const kGPUImageJFAVoroniFragmentShaderString = SHADER_STRING
             glUniform1f(sampleStepUniform, step);
             glUniform2f(sizeUniform, _sizeInPixels.width, _sizeInPixels.height);
             
-            [super renderToTextureWithVertices:vertices textureCoordinates:textureCoordinates sourceTexture:secondFilterOutputTexture];
+            [super renderToTextureWithVertices:vertices textureCoordinates:textureCoordinates sourceTexture:secondFilterOutputTexture frameTime:frameTime];
         } else {
             // Run the second stage of the two-pass filter
             [self setSecondFilterFBO];

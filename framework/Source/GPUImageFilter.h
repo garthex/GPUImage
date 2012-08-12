@@ -49,7 +49,7 @@ typedef struct GPUMatrix3x3 GPUMatrix3x3;
 
     GLProgram *filterProgram;
     GLint filterPositionAttribute, filterTextureCoordinateAttribute;
-    GLint filterInputTextureUniform;
+    GLint filterInputTextureUniform, filterFrameNumberUniform;
     GLfloat backgroundColorRed, backgroundColorGreen, backgroundColorBlue, backgroundColorAlpha;
     
     BOOL preparedToCaptureImage;
@@ -109,7 +109,7 @@ typedef struct GPUMatrix3x3 GPUMatrix3x3;
 
 /// @name Rendering
 + (const GLfloat *)textureCoordinatesForRotation:(GPUImageRotationMode)rotationMode;
-- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture;
+- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture frameTime:(CMTime)frameTime;
 - (void)informTargetsAboutNewFrameAtTime:(CMTime)frameTime;
 - (CGSize)outputFrameSize;
 

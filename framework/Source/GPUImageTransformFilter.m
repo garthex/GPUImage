@@ -125,11 +125,11 @@ NSString *const kGPUImageTransformVertexShaderString = SHADER_STRING
 
     if (_ignoreAspectRatio)
     {
-        [self renderToTextureWithVertices:squareVertices textureCoordinates:[[self class] textureCoordinatesForRotation:inputRotation] sourceTexture:filterSourceTexture];    
+        [self renderToTextureWithVertices:squareVertices textureCoordinates:[[self class] textureCoordinatesForRotation:inputRotation] sourceTexture:filterSourceTexture frameTime:frameTime];    
     }
     else
     {
-        [self renderToTextureWithVertices:adjustedVertices textureCoordinates:[[self class] textureCoordinatesForRotation:inputRotation] sourceTexture:filterSourceTexture];    
+        [self renderToTextureWithVertices:adjustedVertices textureCoordinates:[[self class] textureCoordinatesForRotation:inputRotation] sourceTexture:filterSourceTexture frameTime:frameTime];    
     }
     
     [self informTargetsAboutNewFrameAtTime:frameTime];

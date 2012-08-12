@@ -22,6 +22,7 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
  varying highp vec2 textureCoordinate;
  
  uniform sampler2D inputImageTexture;
+ uniform int frameNumber;
  
  void main()
  {
@@ -75,6 +76,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
     filterPositionAttribute = [filterProgram attributeIndex:@"position"];
     filterTextureCoordinateAttribute = [filterProgram attributeIndex:@"inputTextureCoordinate"];
     filterInputTextureUniform = [filterProgram uniformIndex:@"inputImageTexture"]; // This does assume a name of "inputImageTexture" for the fragment shader
+    filterFrameNumberUniform = [filterProgram uniformIndex:@"frameNumber"];
 
     [filterProgram use];    
     
@@ -442,7 +444,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
     }
 }
 
-- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture;
+- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture frameTime:(CMTime)frameTime;
 {
     if (self.preventRendering)
     {
@@ -460,7 +462,8 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, sourceTexture);
 	
-	glUniform1i(filterInputTextureUniform, 2);	
+	glUniform1i(filterInputTextureUniform, 2);
+    glUniform1i(filterFrameNumberUniform, frameTime.value);
 
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
 	glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
@@ -603,7 +606,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
         1.0f,  1.0f,
     };
     
-    [self renderToTextureWithVertices:imageVertices textureCoordinates:[[self class] textureCoordinatesForRotation:inputRotation] sourceTexture:filterSourceTexture];
+    [self renderToTextureWithVertices:imageVertices textureCoordinates:[[self class] textureCoordinatesForRotation:inputRotation] sourceTexture:filterSourceTexture frameTime:frameTime];
 
     [self informTargetsAboutNewFrameAtTime:frameTime];
 }

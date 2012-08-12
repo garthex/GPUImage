@@ -211,7 +211,7 @@ NSString *const kGPUImageHistogramAccumulationFragmentShaderString = SHADER_STRI
         [self generatePointCoordinates];
     }
     
-    [self renderToTextureWithVertices:NULL textureCoordinates:NULL sourceTexture:filterSourceTexture];
+    [self renderToTextureWithVertices:NULL textureCoordinates:NULL sourceTexture:filterSourceTexture frameTime:frameTime];
     
     [self informTargetsAboutNewFrameAtTime:frameTime];
 }
@@ -236,7 +236,7 @@ NSString *const kGPUImageHistogramAccumulationFragmentShaderString = SHADER_STRI
     inputRotation = kGPUImageNoRotation;
 }
 
-- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture;
+- (void)renderToTextureWithVertices:(const GLfloat *)vertices textureCoordinates:(const GLfloat *)textureCoordinates sourceTexture:(GLuint)sourceTexture frameTime:(CMTime)frameTime;
 {
     if (self.preventRendering)
     {
